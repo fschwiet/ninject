@@ -432,7 +432,7 @@ namespace Ninject
         /// </summary>
 	    public void PrepareDisguise()
 	    {
-            lock (_bindings)
+            lock (_bindingCache)
             {
                 if (_originalBindings != null)
                     throw new InvalidOperationException(
@@ -458,7 +458,7 @@ namespace Ninject
             if (_originalBindings == null)
                 return;
 
-            lock (_bindings)
+            lock (_bindingCache)
             {
                 _bindings.Clear();
 
@@ -469,6 +469,8 @@ namespace Ninject
                 }
 
                 _originalBindings = null;
+
+                _bindingCache.Clear();
             }
 	    }
 
