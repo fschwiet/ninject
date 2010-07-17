@@ -37,6 +37,7 @@ namespace Ninject
 		private readonly Multimap<Type, IBinding> _bindings = new Multimap<Type, IBinding>();
 		private readonly Multimap<Type, IBinding> _bindingCache = new Multimap<Type, IBinding>();
 		private readonly Dictionary<string, INinjectModule> _modules = new Dictionary<string, INinjectModule>();
+        private Multimap<Type, IBinding> _originalBindings = null;
 
 		/// <summary>
 		/// Lock used when adding missing bindings.
@@ -151,14 +152,20 @@ namespace Ninject
 		{
 			Ensure.ArgumentNotNull(binding, "binding");
 
-			AddBindings(new[]{binding});
+		    AddBindings(new[]{binding});
 		}
 
 		private void AddBindings(IEnumerable<IBinding> bindings)
 		{
-			bindings.Map(binding => _bindings.Add(binding.Service, binding));
+            foreach(var binding in bindings)
+            {
+                if (_originalBindings != null)
+                    _bindings.RemoveAll(binding.Service);
 
-			lock (_bindingCache)
+                _bindings.Add(binding.Service, binding);
+            }
+
+		    lock (_bindingCache)
 				_bindingCache.Clear();
 		}
 
@@ -420,7 +427,52 @@ namespace Ninject
 			return new ActivationBlock(this);
 		}
 
-		/// <summary>
+        /// <summary>
+        /// 
+        /// </summary>
+	    public void PrepareDisguise()
+	    {
+            lock (_bindings)
+            {
+                if (_originalBindings != null)
+                    throw new InvalidOperationException(
+                        "Called PrepareDisguise() repeatedly without calling RemoveDisguise first.");
+
+                _originalBindings = new Multimap<Type, IBinding>();
+
+                foreach (KeyValuePair<Type, IBinding> binding in _bindings.SelectMany(
+                    bl => bl.Value.Select(b => new KeyValuePair<Type, IBinding>(bl.Key, b))))
+                {
+                    _originalBindings.Add(binding.Key, binding.Value);
+                }
+
+                _bindingCache.Clear();
+            }
+	    }
+
+        /// <summary>
+        /// 
+        /// </summary>
+	    public void RemoveDisguise()
+	    {
+            if (_originalBindings == null)
+                return;
+
+            lock (_bindings)
+            {
+                _bindings.Clear();
+
+                foreach (KeyValuePair<Type, IBinding> binding in _originalBindings.SelectMany(
+                    bl => bl.Value.Select(b => new KeyValuePair<Type, IBinding>(bl.Key, b))))
+                {
+                    _bindings.Add(binding.Key, binding.Value);
+                }
+
+                _originalBindings = null;
+            }
+	    }
+
+	    /// <summary>
 		/// Creates a new builder for the specified binding.
 		/// </summary>
 		/// <typeparam name="T">The type restriction to apply to the binding builder.</typeparam>
