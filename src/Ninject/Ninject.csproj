@@ -45,6 +45,8 @@
     <DocumentationFile>..\..\build\debug\Ninject.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -81,6 +83,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Activation\Caching\ICachePruner.cs" />
+    <Compile Include="Activation\Providers\FactoryProvider.cs" />
+    <Compile Include="Planning\Bindings\Resolvers\FactoryBindingResolver.cs" />
     <Compile Include="Planning\Bindings\Resolvers\IMissingBindingResolver.cs" />
     <Compile Include="Infrastructure\Disposal\IDisposableObject.cs" />
     <Compile Include="OnePerRequestModule.cs" />
