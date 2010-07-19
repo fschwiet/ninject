@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Moq;
@@ -42,7 +41,7 @@ namespace Ninject.Tests.Integration
             kernel.Get<IWarrior>().ShouldBeInstanceOf<Ninja>();
 
             kernel.PrepareDisguise();
-            
+
             Mock<IWarrior> disguise = new Mock<IWarrior>();
 
             kernel.Bind<IWarrior>().ToConstant(disguise.Object);
