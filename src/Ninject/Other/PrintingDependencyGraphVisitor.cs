@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Ninject.Infrastructure.Introspection;
@@ -7,7 +8,7 @@ namespace Ninject.Other
 {
     public interface IPrintingDependencyGraphVisitor
     {
-        void BeginNodeVisit(DependencyGraphNode node, int i);
+        void BeginNodeVisit(DependencyGraphNode node, int i, IEnumerable<Type> missingDependencies);
     }
 
     public class PrintingDependencyGraphVisitor : IPrintingDependencyGraphVisitor
@@ -19,7 +20,7 @@ namespace Ninject.Other
             _writer = writer;
         }
 
-        public void BeginNodeVisit(DependencyGraphNode node, int i)
+        public void BeginNodeVisit(DependencyGraphNode node, int i, IEnumerable<Type> missingDependencies)
         {
             _writer.Write(String.Concat(Enumerable.Range(0, i).Select(_ => "    ").ToArray()));
 
@@ -30,6 +31,12 @@ namespace Ninject.Other
             } else
             {
                 _writer.WriteLine("{0} ({1})", node.ImplementationName, node.InterfaceType.Format());
+            }
+
+            if (missingDependencies.Any())
+            {
+                _writer.WriteLine("MISSING DEPENDENCIES: " +
+                                  string.Join(", ", missingDependencies.Select(d => d.Format()).ToArray()));
             }
         }
     }

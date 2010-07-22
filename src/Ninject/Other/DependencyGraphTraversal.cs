@@ -43,10 +43,15 @@ namespace Ninject.Other
             {
                 var next = nodesToVisit.Pop();
 
-                visitor.BeginNodeVisit(next.Key, next.Value);
+                DependencyGraphNode node = next.Key;
+                int depth = next.Value;
 
-                foreach (var boundService in next.Key.GetBoundServices(nodes))
-                    nodesToVisit.Push(new KeyValuePair<DependencyGraphNode, int>(boundService, next.Value + 1));
+                var missingDependencies = node.GetMissingDependencies(nodes);
+
+                visitor.BeginNodeVisit(node, depth, missingDependencies);
+
+                foreach (var boundService in node.GetBoundServices(nodes))
+                    nodesToVisit.Push(new KeyValuePair<DependencyGraphNode, int>(boundService, depth + 1));
             }
         }
     }

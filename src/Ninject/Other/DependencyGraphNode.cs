@@ -64,8 +64,15 @@ namespace Ninject.Other
                         yield return node;
                 }
             }
+        }
 
-            yield break;
+        public IEnumerable<Type> GetMissingDependencies(IEnumerable<DependencyGraphNode> allNodes)
+        {
+            foreach (var dependency in Dependencies)
+            {
+                if (!allNodes.Where(n => n.SatisfiesDependencyOn(dependency)).Any())
+                    yield return dependency;
+            }
         }
     }
 }

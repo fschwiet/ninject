@@ -63,7 +63,7 @@ namespace Ninject.Tests.Other
 
             var sut = new PrintingDependencyGraphVisitor(writer);
 
-            sut.BeginNodeVisit(node, offset);
+            sut.BeginNodeVisit(node, offset, new Type[0]);
 
             return result.ToString();
         }

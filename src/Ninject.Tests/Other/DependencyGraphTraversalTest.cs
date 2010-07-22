@@ -11,7 +11,7 @@ namespace Ninject.Tests.Other
     public class DependencyGraphTraversalTest : DependencyGraphingKernelContext
     {
         [Fact]
-        public void not_sure_what_this_tests()
+        public void print_dependency_graph()
         {
             kernel.Bind<IWeapon>().To<Sword>();
             kernel.Bind<Juggler>().ToSelf();

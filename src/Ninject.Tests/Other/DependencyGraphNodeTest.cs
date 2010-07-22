@@ -73,5 +73,24 @@ namespace Ninject.Tests.Other
 
             result.ShouldContain(expectedNode);
         }
+
+        [Fact]
+        public void GetMissingDependencies_includes_missing_dependencies()
+        {
+            var expectedNode = new DependencyGraphNode()
+            {
+                InterfaceType = typeof(IWeapon)
+            };
+
+            var sut = new DependencyGraphNode();
+            sut.Dependencies = new[] { typeof(IWeapon), typeof(IWarrior) };
+
+            var result = sut.GetMissingDependencies(new DependencyGraphNode[] {
+                expectedNode,
+                sut
+            });
+
+            result.ShouldContain(typeof(IWarrior));
+        }
     }
 }
