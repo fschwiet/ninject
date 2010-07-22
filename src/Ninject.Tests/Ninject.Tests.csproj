@@ -104,7 +104,6 @@
     <Compile Include="Integration\ManualReleaseTests.cs" />
     <Compile Include="Integration\ModuleLoadingTests.cs" />
     <Compile Include="Fakes\NinjaBarracks.cs" />
-    <Compile Include="Integration\MultiDependency.cs" />
     <Compile Include="Integration\PropertyInjectionTests.cs" />
     <Compile Include="Integration\RequestScopeTests.cs" />
     <Compile Include="Integration\ExternalInjectionTests.cs" />

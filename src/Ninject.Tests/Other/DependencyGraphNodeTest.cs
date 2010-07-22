@@ -52,7 +52,7 @@ namespace Ninject.Tests.Other
             var sut = new DependencyGraphNode();
             sut.InterfaceType = typeof(Sword);
 
-            Assert.False(sut.SatisfiesDependencyOn(typeof(Func<Sword>)));
+            Assert.True(sut.SatisfiesDependencyOn(typeof(Func<Sword>)));
         }
 
         [Fact]
