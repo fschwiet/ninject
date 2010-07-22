@@ -123,6 +123,10 @@
     <None Include="TestModules\test.foo">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="Other\DepdencyGraphingKernelTest.cs" />
+    <Compile Include="Other\DependencyGraphNodeTest.cs" />
+    <Compile Include="Other\DependencyGraphTraversalTest.cs" />
+    <Compile Include="Other\PrintingDependencyGraphVisitorTest.cs" />
     <Compile Include="Unit\CallbackProviderTests.cs" />
     <Compile Include="Unit\ConstantProviderTests.cs" />
     <Compile Include="Unit\ActivationBlockTests.cs" />
@@ -182,6 +186,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

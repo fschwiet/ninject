@@ -20,10 +20,12 @@ using Ninject.Infrastructure;
 using Ninject.Infrastructure.Introspection;
 using Ninject.Infrastructure.Language;
 using Ninject.Modules;
+using Ninject.Other;
 using Ninject.Parameters;
 using Ninject.Planning;
 using Ninject.Planning.Bindings;
 using Ninject.Planning.Bindings.Resolvers;
+using Ninject.Selection;
 using Ninject.Syntax;
 #endregion
 
@@ -34,7 +36,7 @@ namespace Ninject
 	/// </summary>
 	public abstract class KernelBase : BindingRoot, IKernel
 	{
-		private readonly Multimap<Type, IBinding> _bindings = new Multimap<Type, IBinding>();
+		protected readonly Multimap<Type, IBinding> _bindings = new Multimap<Type, IBinding>();
 		private readonly Multimap<Type, IBinding> _bindingCache = new Multimap<Type, IBinding>();
 		private readonly Dictionary<string, INinjectModule> _modules = new Dictionary<string, INinjectModule>();
         private Multimap<Type, IBinding> _originalBindings = null;

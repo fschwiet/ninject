@@ -43,7 +43,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>..\..\build\debug\Ninject.xml</DocumentationFile>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <RegisterForComInterop>false</RegisterForComInterop>
@@ -84,6 +84,10 @@
     </Compile>
     <Compile Include="Activation\Caching\ICachePruner.cs" />
     <Compile Include="Activation\Providers\FactoryProvider.cs" />
+    <Compile Include="Other\DependencyGraphingKernel.cs" />
+    <Compile Include="Other\DependencyGraphNode.cs" />
+    <Compile Include="Other\DependencyGraphTraversal.cs" />
+    <Compile Include="Other\PrintingDependencyGraphVisitor.cs" />
     <Compile Include="Planning\Bindings\Resolvers\FactoryBindingResolver.cs" />
     <Compile Include="Planning\Bindings\Resolvers\IMissingBindingResolver.cs" />
     <Compile Include="Infrastructure\Disposal\IDisposableObject.cs" />
