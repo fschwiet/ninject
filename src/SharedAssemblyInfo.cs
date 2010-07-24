@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProductAttribute("Ninject: Lightweight dependency injection for .NET")]
 [assembly: AssemblyCompanyAttribute("Enkari, Ltd.")]
 [assembly: AssemblyCopyrightAttribute("Copyright © 2007-2010 Enkari, Ltd. and contributors")]
-[assembly: AssemblyVersionAttribute("2.1.0.61")]
+[assembly: AssemblyVersionAttribute("2.1.0.62")]
 [assembly: ComVisibleAttribute(false)]
 [assembly: CLSCompliantAttribute(true)]
 

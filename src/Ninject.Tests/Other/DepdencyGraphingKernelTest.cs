@@ -63,13 +63,23 @@ namespace Ninject.Tests.Other
         }
 
         [Fact]
-        public void output_includes_dependencies()
+        public void output_includes_dependencies_when_bound_to_types()
         {
             kernel.Bind<IWarrior>().To<Ninja>();
 
             var result = kernel.LoadSupportedServices();
 
             Assert.True(result.First().Dependencies.Contains(typeof(IWeapon)));
+        }
+
+        [Fact]
+        public void output_has_no_dependencies_when_bound_otherwise()
+        {
+            kernel.Bind<IWeapon>().ToConstant(new Sword());
+
+            var result = kernel.LoadSupportedServices();
+
+            Assert.Equal(0, result.First().Dependencies.Count());
         }
     }
 }

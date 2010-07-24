@@ -69,7 +69,8 @@ namespace Ninject.Other
                     case BindingTarget.Provider:
                         result.Add(new DependencyGraphNode()
                         {
-                            ImplementationName =  GetBindingProvider(binding).GetType().Format()
+                            ImplementationName =  GetBindingProvider(binding).GetType().Format(),
+                            Dependencies = new Type[] {}
                         });
                         break;
                        
