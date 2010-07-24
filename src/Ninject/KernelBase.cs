@@ -442,12 +442,10 @@ namespace Ninject
         /// </summary>
 	    public void PrepareDisguise()
 	    {
+            RemoveDisguise();
+            
             lock (_bindingCache)
             {
-                if (_originalBindings != null)
-                    throw new InvalidOperationException(
-                        "Called PrepareDisguise() repeatedly without calling RemoveDisguise first.");
-
                 _originalBindings = new Multimap<Type, IBinding>();
 
                 foreach (KeyValuePair<Type, IBinding> binding in _bindings.SelectMany(

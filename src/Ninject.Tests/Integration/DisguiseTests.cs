@@ -21,18 +21,6 @@ namespace Ninject.Tests.Integration
     class DisguiseTests : DisguiseTestContext
     {
         [Fact]
-        public void cannot_redisguise_without_removing()
-        {
-            kernel.PrepareDisguise();
-
-            Assert.Throws(typeof(InvalidOperationException),
-                () =>
-                {
-                    kernel.PrepareDisguise();
-                });
-        }
-
-        [Fact]
         public void can_disguise_a_service()
         {
             kernel.Bind<IWeapon>().To<Sword>();
@@ -65,18 +53,6 @@ namespace Ninject.Tests.Integration
             kernel.RemoveDisguise();
 
             kernel.Get<IWarrior>().ShouldBeInstanceOf<Ninja>();
-        }
-
-        [Fact]
-        public void can_reundisguise()
-        {
-            //  Cleanup code that removes disguises should be robust
-            // towards safe overuse
-
-            kernel.PrepareDisguise();
-
-            kernel.RemoveDisguise();
-            kernel.RemoveDisguise();
         }
     }
 }
