@@ -5,12 +5,31 @@ using System.Text;
 
 namespace Ninject.Other
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DependencyGraphNode
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public Type InterfaceType;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string ImplementationName;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public IEnumerable<Type> Dependencies;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public bool SatisfiesDependencyOn(Type type)
         {
             return type == InterfaceType
@@ -54,6 +73,11 @@ namespace Ninject.Other
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="allNodes"></param>
+        /// <returns></returns>
         public IEnumerable<DependencyGraphNode> GetBoundServices(IEnumerable<DependencyGraphNode> allNodes)
         {
             foreach (var dependency in Dependencies)
@@ -66,6 +90,11 @@ namespace Ninject.Other
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="allNodes"></param>
+        /// <returns></returns>
         public IEnumerable<Type> GetMissingDependencies(IEnumerable<DependencyGraphNode> allNodes)
         {
             foreach (var dependency in Dependencies)

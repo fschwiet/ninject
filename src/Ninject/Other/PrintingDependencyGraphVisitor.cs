@@ -6,20 +6,42 @@ using Ninject.Infrastructure.Introspection;
 
 namespace Ninject.Other
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IPrintingDependencyGraphVisitor
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="i"></param>
+        /// <param name="missingDependencies"></param>
         void BeginNodeVisit(DependencyGraphNode node, int i, IEnumerable<Type> missingDependencies);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class PrintingDependencyGraphVisitor : IPrintingDependencyGraphVisitor
     {
         private readonly TextWriter _writer;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
         public PrintingDependencyGraphVisitor(TextWriter writer)
         {
             _writer = writer;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="i"></param>
+        /// <param name="missingDependencies"></param>
         public void BeginNodeVisit(DependencyGraphNode node, int i, IEnumerable<Type> missingDependencies)
         {
             _writer.Write(String.Concat(Enumerable.Range(0, i).Select(_ => "    ").ToArray()));

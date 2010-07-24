@@ -10,11 +10,18 @@ using Ninject.Planning.Bindings.Resolvers;
 
 namespace Ninject.Other
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DependencyGraphingKernel : StandardKernel
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<DependencyGraphNode> LoadSupportedServices()
         {
-            var allServices = _bindings.Keys.Distinct().ToArray();
+            var allServices = Bindings.Keys.Distinct().ToArray();
 
             List<Type> unresolveableTypes = new List<Type>(allServices.Length);
 
@@ -30,7 +37,7 @@ namespace Ninject.Other
 
             List<DependencyGraphNode> result = new List<DependencyGraphNode>();
 
-            foreach (KeyValuePair<Type, ICollection<IBinding>> bindings in _bindings)
+            foreach (KeyValuePair<Type, ICollection<IBinding>> bindings in Bindings)
             {
                 foreach (var binding in bindings.Value)
                 {
@@ -75,6 +82,13 @@ namespace Ninject.Other
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="binding"></param>
+        /// <param name="implementedBy"></param>
+        /// <param name="providerType"></param>
+        /// <returns></returns>
         public IEnumerable<Type> GetDependenciesOfStandardProvider(IBinding binding, ref Type implementedBy, ref Type providerType)
         {
             IProvider bindingProvider = GetBindingProvider(binding);

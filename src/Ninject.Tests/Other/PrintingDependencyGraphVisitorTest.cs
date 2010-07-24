@@ -21,7 +21,7 @@ namespace Ninject.Tests.Other
                 InterfaceType = interfaceType
             };
 
-            string resultString = DoBeginNodeVisitForNode(node);
+            string resultString = DoBeginNodeVisitForNode(node, 0);
 
             resultString.ShouldContain("IList");
         }
@@ -35,7 +35,7 @@ namespace Ninject.Tests.Other
                 ImplementationName = "someString1254"
             };
 
-            string resultString = DoBeginNodeVisitForNode(node);
+            string resultString = DoBeginNodeVisitForNode(node, 0);
 
             resultString.ShouldContain(node.ImplementationName);
         }
@@ -56,7 +56,7 @@ namespace Ninject.Tests.Other
             resultString.Substring(0, 8).ShouldBe(expectedSpacing);
         }
 
-        private string DoBeginNodeVisitForNode(DependencyGraphNode node, int offset = 0)
+        private string DoBeginNodeVisitForNode(DependencyGraphNode node, int offset)
         {
             StringBuilder result = new StringBuilder();
             TextWriter writer = new StringWriter(result);

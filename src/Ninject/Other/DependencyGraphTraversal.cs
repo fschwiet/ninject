@@ -5,8 +5,16 @@ using System.Text;
 
 namespace Ninject.Other
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DependencyGraphTraversal
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nodes"></param>
+        /// <param name="visitor"></param>
         static public void VisitGraph(IEnumerable<DependencyGraphNode> nodes, IPrintingDependencyGraphVisitor visitor)
         {
             Dictionary<DependencyGraphNode, int> dependencyTreeSize = new Dictionary<DependencyGraphNode, int>();

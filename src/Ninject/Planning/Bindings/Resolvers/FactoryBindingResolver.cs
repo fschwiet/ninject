@@ -45,6 +45,11 @@ namespace Ninject.Planning.Bindings.Resolvers
             }};
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="factoryType"></param>
+        /// <returns></returns>
         public static Type TypeIsFactoryMethodFor(Type factoryType)
         {
             if (CanResolveType(factoryType))

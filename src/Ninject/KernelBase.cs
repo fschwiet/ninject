@@ -36,7 +36,7 @@ namespace Ninject
 	/// </summary>
 	public abstract class KernelBase : BindingRoot, IKernel
 	{
-		protected readonly Multimap<Type, IBinding> _bindings = new Multimap<Type, IBinding>();
+		private readonly Multimap<Type, IBinding> _bindings = new Multimap<Type, IBinding>();
 		private readonly Multimap<Type, IBinding> _bindingCache = new Multimap<Type, IBinding>();
 		private readonly Dictionary<string, INinjectModule> _modules = new Dictionary<string, INinjectModule>();
         private Multimap<Type, IBinding> _originalBindings = null;
@@ -55,6 +55,14 @@ namespace Ninject
 		/// Gets the component container, which holds components that contribute to Ninject.
 		/// </summary>
 		public IComponentContainer Components { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Multimap<Type, IBinding> Bindings
+        {
+            get { return _bindings; }
+        }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="KernelBase"/> class.
