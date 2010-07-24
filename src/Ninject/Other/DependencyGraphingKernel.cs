@@ -13,7 +13,19 @@ namespace Ninject.Other
     /// <summary>
     /// 
     /// </summary>
-    public class DependencyGraphingKernel : StandardKernel
+    public interface IDependencyGraphingKernel : IKernel
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<DependencyGraphNode> LoadSupportedServices();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class DependencyGraphingKernel : StandardKernel, IDependencyGraphingKernel
     {
         /// <summary>
         /// 
