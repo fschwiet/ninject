@@ -44,6 +44,9 @@ namespace Ninject.Other
         /// <param name="missingDependencies"></param>
         public void BeginNodeVisit(DependencyGraphNode node, int i, IEnumerable<Type> missingDependencies)
         {
+            if (i == 0)
+                _writer.WriteLine();
+
             _writer.Write(String.Concat(Enumerable.Range(0, i).Select(_ => "    ").ToArray()));
 
             if (node.ImplementationName == null

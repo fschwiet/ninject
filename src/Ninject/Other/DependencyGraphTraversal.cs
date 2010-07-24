@@ -23,7 +23,7 @@ namespace Ninject.Other
             foreach (var node in nodes)
                 countOfUsages[node] = 0;
 
-            foreach (var node in nodes.OrderBy(n => n.Dependencies.Count()))
+            foreach (var node in nodes.OrderBy(n => n.GetBoundServices(nodes).Count()))
             {
                 int nodeWeight = 0;
 
@@ -42,7 +42,7 @@ namespace Ninject.Other
 
             var nodesToVisit = new Stack<KeyValuePair<DependencyGraphNode, int>>();
 
-            foreach (var node in nodes.Where(n => countOfUsages[n] == 0).OrderByDescending(n => dependencyTreeSize[n]))
+            foreach (var node in nodes.Where(n => countOfUsages[n] == 0).OrderBy(n => dependencyTreeSize[n]))
             {
                 nodesToVisit.Push(new KeyValuePair<DependencyGraphNode, int>(node, 0));
             }
