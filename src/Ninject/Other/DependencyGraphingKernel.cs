@@ -70,6 +70,7 @@ namespace Ninject.Other
                         result.Add(new DependencyGraphNode()
                         {
                             ImplementationName =  GetBindingProvider(binding).GetType().Format(),
+                            InterfaceType = binding.Service,
                             Dependencies = new Type[] {}
                         });
                         break;

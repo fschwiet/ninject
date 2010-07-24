@@ -33,9 +33,19 @@ namespace Ninject.Tests.Other
         }
 
         [Fact]
-        public void type_output_includes_InterfaceType()
+        public void type_output_includes_InterfaceType_when_bound_to_a_type()
         {
             kernel.Bind<IWeapon>().To<Sword>();
+
+            var result = kernel.LoadSupportedServices();
+
+            Assert.Equal(typeof(IWeapon), result.First().InterfaceType);
+        }
+
+        [Fact]
+        public void type_output_includes_InterfaceType_when_bound_otherwise()
+        {
+            kernel.Bind<IWeapon>().ToConstant(new Sword());
 
             var result = kernel.LoadSupportedServices();
 
