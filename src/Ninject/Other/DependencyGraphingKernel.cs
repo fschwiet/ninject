@@ -30,6 +30,17 @@ namespace Ninject.Other
         /// <summary>
         /// 
         /// </summary>
+        protected override void AddComponents()
+        {
+            base.AddComponents();
+
+            Components.RemoveAll<IMissingBindingResolver>();
+            Components.Add<IMissingBindingResolver, FactoryBindingResolver>();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         public IEnumerable<DependencyGraphNode> LoadSupportedServices()
         {
